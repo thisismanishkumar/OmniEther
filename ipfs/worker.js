@@ -20,6 +20,7 @@ class Orbit {
     // }
 
     startingIPFS = async () => {
+        if(!window.ipfs){
         window.ipfs = new IPFS({
             // preload: { enabled: true , addresses: ['/dns4/node1.preload.ipfs.io/https'] },
             repo: './orbitdb/examples/ipfs2',
@@ -54,7 +55,7 @@ class Orbit {
                 }
             }
 
-        })
+        })}
 
         // ipfs.on('error', (err) => console.error(err))
         await window.ipfs.ready
@@ -79,7 +80,7 @@ class Orbit {
             console.log('orbit instantiated')
             console.log(orbitdb.identity.id)
             identity = orbitdb.identity.id
-                console.log('connecting database')
+                console.log('connecting database',this.DB_ADDRESS)
                 db = await orbitdb.eventlog(this.DB_ADDRESS);
 
                 await db.load();

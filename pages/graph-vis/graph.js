@@ -25,9 +25,9 @@ class graphs extends Component{
     static async getInitialProps(){
         let color = ["#e04141","#e09c41","#e0df41","#7be041","#41e0c9"]
         let finalNodes = []
-        finalNodes.push({id:0x2152CD8b7CFEF975fb498cB2eF6aaf97185c45f6,label:'Factory ',color:color[finalNodes.length%5]})
+        finalNodes.push({id:0xDb736373dd9D8a0d1647F2Dc09fb4b8553DC94F1,label:'Factory ',color:color[finalNodes.length%5]})
         let tempNodes = []
-        tempNodes.push(0x2152CD8b7CFEF975fb498cB2eF6aaf97185c45f6)
+        tempNodes.push(0xDb736373dd9D8a0d1647F2Dc09fb4b8553DC94F1)
         let finalEdges =[]
         const rootNodes = await factory.methods.getDeployedRoots().call()
         rootNodes.map(address => {
@@ -60,18 +60,20 @@ class graphs extends Component{
                 console.log(edges);
             }
         };
-        while(this.props.tempNodes.length)
-        {
-            const fund = Fund(this.props.tempNodes[0])
-            const childNodes = await fund.methods.getChildFunds().call()
-            childNodes.map(address => {
-                this.props.finalEdges.push({from:this.props.tempNodes[0],to:address})
-                this.props.finalNodes.push({id:address,label:'Node '+this.props.finalNodes.length,color:this.props.color[this.props.finalNodes.length%5]})
-                this.props.tempNodes.push(address)
-            })
-            this.props.tempNodes.shift()
-            this.setState({nodes:this.props.finalNodes,edges:this.props.finalEdges,options:options,events:events,loading:false})
-        }
+        
+        // while(this.props.tempNodes.length)
+        // {
+        //     const fund = Fund(this.props.tempNodes[0])
+        //     const childNodes = await fund.methods.getChildFunds().call()
+        //     childNodes.map(address => {
+        //         this.props.finalEdges.push({from:this.props.tempNodes[0],to:address})
+        //         this.props.finalNodes.push({id:address,label:'Node '+this.props.finalNodes.length,color:this.props.color[this.props.finalNodes.length%5]})
+        //         this.props.tempNodes.push(address)
+        //     })
+        //     this.props.tempNodes.shift()
+        //     // this.setState({nodes:this.props.finalNodes,edges:this.props.finalEdges,options:options,events:events,loading:false})
+        // }
+        this.setState({nodes:this.props.finalNodes,edges:this.props.finalEdges,options:options,events:events,loading:false})
         
     }
 renderGraph = ()=>{

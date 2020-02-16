@@ -23,9 +23,9 @@ class FundManagerIndex extends Component {
 	static async getInitialProps(){
         let color = ["#e04141","#e09c41","#e0df41","#7be041","#41e0c9"]
         let finalNodes = []
-        finalNodes.push({id:0x2152CD8b7CFEF975fb498cB2eF6aaf97185c45f6,label:'Factory ',color:color[finalNodes.length%5]})
+        finalNodes.push({id:0x4a9b67b73eD7ff4c0B2a24F694DCa0f93f8662b0,label:'Factory ',color:color[finalNodes.length%5]})
         let tempNodes = []
-        tempNodes.push(0x2152CD8b7CFEF975fb498cB2eF6aaf97185c45f6)
+        tempNodes.push(0x4a9b67b73eD7ff4c0B2a24F694DCa0f93f8662b0)
         let finalEdges =[]
         const rootNodes = await factory.methods.getDeployedRoots().call()
         rootNodes.map(address => {
@@ -63,25 +63,15 @@ class FundManagerIndex extends Component {
                 console.log(nodes);
                 console.log("Selected edges***:");
 				console.log(edges);
-				this.renderNodesInfo(nodes)
+				// this.renderNodesInfo(nodes)
 			},
 			hoverNode:function(node){
 				console.log("$$$$"+node)
-				this.renderNodeInfo(node)
+				// this.renderNodeInfo(node)
 			}
         };
-        while(this.props.tempNodes.length)
-        {
-            const fund = Fund(this.props.tempNodes[0])
-            const childNodes = await fund.methods.getChildFunds().call()
-            childNodes.map(address => {
-                this.props.finalEdges.push({from:this.props.tempNodes[0],to:address})
-                this.props.finalNodes.push({id:address,label:'Node '+this.props.finalNodes.length,color:this.props.color[this.props.finalNodes.length%5]})
-                this.props.tempNodes.push(address)
-            })
-            this.props.tempNodes.shift()
-            this.setState({nodes:this.props.finalNodes,edges:this.props.finalEdges,options:options,events:events,loading:false})
-        }
+        
+		this.setState({nodes:this.props.finalNodes,edges:this.props.finalEdges,options:options,events:events,loading:false})
         
 	}
 	

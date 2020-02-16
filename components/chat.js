@@ -34,8 +34,8 @@ export default class chat extends Component {
         var date = today.getDate() + '/' + today.getMonth() + '/' + today.getFullYear();
         var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
         var ciphertext = CryptoJS.AES.encrypt(this.state.msg, this.props.pass).toString();
-        var ciphertext1 = CryptoJS.AES.encrypt(this.props.msg, this.props.pass).toString();
-        const entry = { reply: true, replyOfUserId: this.props.latest.userId, replyOfMsg: ciphertext1, replyOfMsgDate: this.props.latest.date, replyOfMsgTime: this.props.latest.time, userId: this.props.userId, msg: ciphertext, date: date, time: time }
+        // var ciphertext1 = CryptoJS.AES.encrypt(this.props.latest.msg, this.props.pass).toString();
+        const entry = { reply: true, replyOfUserId: this.props.latest.userId, replyOfMsg: this.props.latest.msg, replyOfMsgDate: this.props.latest.date, replyOfMsgTime: this.props.latest.time, userId: this.props.userId, msg: ciphertext, date: date, time: time }
         
         
         wk.addingToDB(entry).then((result) => {
@@ -120,7 +120,7 @@ export default class chat extends Component {
                             </Comment>
                             <Collapse isOpened={this.state.isOpen}>
                                 <div>
-                                    <Form reply onSubmit={this.onSubmit} style={{margin:0,padding:0}}>
+                                    <Form reply onSubmit={this.onSubmit} >
                                         <Form.TextArea value={this.state.msg}
                                             onChange={event => this.setState({ msg: event.target.value })} />
                                         <Button content='Add Reply' labelPosition='left' icon='edit' primary />
