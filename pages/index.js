@@ -69,8 +69,21 @@ class FundManagerIndex extends Component {
 				console.log("$$$$"+node)
 				// this.renderNodeInfo(node)
 			}
-        };
-        
+		}
+		
+		
+        // while(this.props.tempNodes.length)
+        // {
+        //     const fund = Fund(this.props.tempNodes[0])
+        //     const childNodes = await fund.methods.getChildFunds().call()
+        //     childNodes.map(address => {
+        //         this.props.finalEdges.push({from:this.props.tempNodes[0],to:address})
+        //         this.props.finalNodes.push({id:address,label:'Node '+this.props.finalNodes.length,color:this.props.color[this.props.finalNodes.length%5]})
+        //         this.props.tempNodes.push(address)
+        //     })
+        //     this.props.tempNodes.shift()
+        //     this.setState({nodes:this.props.finalNodes,edges:this.props.finalEdges,options:options,events:events,loading:false})
+		// }
 		this.setState({nodes:this.props.finalNodes,edges:this.props.finalEdges,options:options,events:events,loading:false})
         
 	}
